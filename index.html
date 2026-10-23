@@ -1,1 +1,1397 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support · StepStella</title>
+<meta name="description" content="Help, FAQ, and contact for the StepStella iPhone app, in English, Korean, and Japanese.">
+<style>
+/*
+  걸음별자리(StepStella) 웹 문서 공통 스타일
+  - 지원 · 개인정보처리방침 · 이용약관 페이지가 함께 쓴다.
+  - 외부 글꼴과 스크립트를 쓰지 않는다. 시스템 글꼴만 쓴다.
+  - 색은 아래 :root 변수에만 적는다. 강조색은 앱 브랜드 초록(03_visual_design/00_design_decisions.md V3)이다.
+    라이트 #16794A, 다크 #26A166. 모든 글자 색은 배경 위에서 WCAG AA(4.5:1) 이상이다.
+*/
 
+:root {
+  color-scheme: light dark;
+
+  --bg: #ffffff;          /* 페이지 배경 */
+  --surface: #f3f6f4;     /* 목차 · 표 머리 · FAQ 배경 */
+  --text: #16211c;        /* 본문 글자 (WalklogInk 라이트) · 흰 배경 16.6:1 */
+  --text-muted: #4d5a53;  /* 보조 글자 · 흰 배경 7.2:1 */
+  --accent: #16794a;      /* 링크 · 강조 (WalklogGreen 라이트) · 흰 배경 5.4:1 */
+  --line: #dce7e1;        /* 구분선 (WalklogLine 라이트, 장식용) */
+  --todo-bg: #ffe27a;     /* 아직 정하지 않은 값 표시 배경 */
+  --todo-text: #16211c;   /* 노란 배경 위 글자 · 12.9:1 */
+  --code-bg: #eaf0ec;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #101412;
+    --surface: #1a201d;
+    --text: #dae9e1;        /* WalklogInk 다크 · 14.8:1 */
+    --text-muted: #a6b5ad;  /* 8.7:1 */
+    --accent: #26a166;      /* WalklogGreen 다크 · 5.6:1 */
+    --line: #323a36;        /* WalklogLine 다크 */
+    --todo-bg: #f5cf4b;
+    --todo-text: #1a1400;   /* 12.2:1 */
+    --code-bg: #232a26;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, system-ui, "Hiragino Sans", "Apple SD Gothic Neo", sans-serif;
+  font-size: 1rem;
+  line-height: 1.75;
+  word-break: keep-all;      /* 한국어 낱말 중간에서 줄이 바뀌지 않게 한다 */
+  overflow-wrap: anywhere;   /* 긴 메일 주소 · 주소가 화면 밖으로 나가지 않게 한다 */
+}
+
+body:lang(ja) {
+  word-break: normal;        /* 일본어는 낱말 사이에 띄어쓰기가 없으므로 기본 줄바꿈을 쓴다 */
+}
+
+/* 머리글 */
+
+.site-header {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  color: var(--text);
+  font-weight: 700;
+  font-size: 1.125rem;
+  text-decoration: none;
+}
+
+.lang {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  font-size: 0.9375rem;
+}
+
+.lang a {
+  color: var(--accent);
+}
+
+.lang a[aria-current="true"] {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* 본문 */
+
+.doc {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 8px 16px 48px;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.35;
+  color: var(--text);
+}
+
+h1 {
+  font-size: 1.75rem;
+  margin: 24px 0 8px;
+}
+
+h2 {
+  font-size: 1.375rem;
+  margin: 40px 0 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+h3 {
+  font-size: 1.125rem;
+  margin: 28px 0 8px;
+}
+
+p,
+ul,
+ol {
+  margin: 0 0 16px;
+}
+
+ul,
+ol {
+  padding-left: 1.5em;
+}
+
+li + li {
+  margin-top: 4px;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.15em;
+}
+
+a:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+strong {
+  font-weight: 700;
+}
+
+code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.9em;
+  background-color: var(--code-bg);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+.meta {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+/* 목차 */
+
+.toc {
+  background-color: var(--surface);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin: 16px 0 8px;
+}
+
+.toc ol {
+  margin: 0;
+}
+
+/* 표: 표만 가로로 밀어 볼 수 있고, 페이지는 가로로 밀리지 않는다 */
+
+.table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+th,
+td {
+  text-align: left;
+  vertical-align: top;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+  min-width: 8em;
+}
+
+th {
+  background-color: var(--surface);
+  font-weight: 700;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* 아직 정하지 않은 값 */
+
+mark.todo {
+  background-color: var(--todo-bg);
+  color: var(--todo-text);
+  padding: 0.05em 0.3em;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+/* 자주 묻는 질문 */
+
+details.faq {
+  background-color: var(--surface);
+  border-radius: 8px;
+  margin: 0 0 8px;
+}
+
+details.faq summary {
+  cursor: pointer;
+  padding: 12px 16px;
+  font-weight: 600;
+}
+
+details.faq[open] summary {
+  border-bottom: 1px solid var(--line);
+}
+
+details.faq > div {
+  padding: 12px 16px 4px;
+}
+
+/* 바닥글 */
+
+.site-footer {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px 16px 32px;
+  border-top: 1px solid var(--line);
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+/* 인쇄 */
+
+@media print {
+  :root {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --text: #000000;
+    --text-muted: #333333;
+    --accent: #000000;
+  }
+
+  .lang,
+  .toc {
+    display: none;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+}
+
+/* 한 파일 세 언어 페이지에 더한 규칙 */
+
+.lang-section + .lang-section {
+  border-top: 4px solid var(--accent);  /* 언어 구역 사이 구분선 */
+}
+
+.lang-section:lang(ja) {
+  word-break: normal;        /* body:lang(ja)와 같은 이유. 이 페이지의 body는 lang="en"이다 */
+}
+
+.doc-nav {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px 16px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  font-size: 0.9375rem;
+}
+
+.doc + .doc {
+  padding-top: 0;            /* 방침 뒤에 이어지는 약관 */
+}
+
+.site-footer a {
+  color: var(--accent);
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="https://purple-lamp-236.github.io/walk-log-landing/">StepStella</a>
+  <nav class="lang" aria-label="Language"><a href="#en" lang="en">English</a><a href="#ko" lang="ko">한국어</a><a href="#ja" lang="ja">日本語</a></nav>
+</header>
+<main>
+<article id="en" lang="en" class="lang-section">
+  <div class="doc" id="en-support">
+    <h1>StepStella Support</h1>
+    <p class="meta">Last updated: 2026-10-23</p>
+    <nav class="toc" aria-label="Contents"><ol>
+      <li><a href="#en-support-s1">Contact us</a></li>
+      <li><a href="#en-support-s2">About StepStella</a></li>
+      <li><a href="#en-support-s3">Getting started</a></li>
+      <li><a href="#en-support-s4">FAQ: Steps and records</a></li>
+      <li><a href="#en-support-s5">FAQ: Streaks and your journey</a></li>
+      <li><a href="#en-support-s6">FAQ: Location and who can see what</a></li>
+      <li><a href="#en-support-s7">FAQ: Reporting and blocking</a></li>
+      <li><a href="#en-support-s8">FAQ: Your account and data</a></li>
+      <li><a href="#en-support-s9">Privacy Policy and Terms of Service</a></li>
+      <li><a href="#en-support-s10">Open source licenses and image credits</a></li>
+    </ol></nav>
+
+    <section id="en-support-s1">
+      <h2>Contact us</h2>
+      <p>If you have a question or a problem, please email us.</p>
+      <ul>
+        <li>Email: <a href="mailto:purple.lamp.236@gmail.com">purple.lamp.236@gmail.com</a></li>
+        <li>Expected reply time: We check reports within 48 hours. For other questions, we usually reply within 3 days.</li>
+        <li>Operator: an individual developer, YoungBeom Seo</li>
+      </ul>
+      <h3>Email us from the app</h3>
+      <p>In the app, go to the <strong>Settings</strong> tab › <strong>Support</strong> › <strong>Contact Us</strong>. This opens Mail.</p>
+      <ul>
+        <li>The subject is "[StepStella] Inquiry".</li>
+        <li>The message already includes your app version, iOS version, device model, and app language.</li>
+        <li>Before you send it, you can review the message and delete anything you don't need.</li>
+        <li>If Mail can't open, you'll see a window where you can copy our address. Tap <strong>Copy Address</strong> and send the email from another mail app.</li>
+      </ul>
+      <h3>What to include in your email</h3>
+      <ul>
+        <li><strong>Device model</strong>: You can find it in the iPhone Settings app › General › About.</li>
+        <li><strong>iOS version</strong></li>
+        <li><strong>App version</strong>: The app does not show its version on screen. If you use Contact Us in the app, the version is added for you.</li>
+        <li><strong>What happened</strong>: Tell us which screen you were on and what you were doing when the problem happened. Please also include any message you saw and how to make the problem happen again.</li>
+      </ul>
+      <p>If you see an inappropriate record in the feed, you can report it in the app or email us. See <a href="#en-support-s7">Reporting and blocking</a>.</p>
+    </section>
+
+    <section id="en-support-s2">
+      <h2>About StepStella</h2>
+      <p>StepStella is an iPhone app. Once a day, it reads yesterday's step count and walking distance from Apple Health. You move your virtual position on Earth that distance in the direction you choose, and leave a short message. Your daily records connect like a constellation on a globe, and you can see public records from other people whose virtual positions are near yours ("Journey Neighbors"). Their records are anonymous.</p>
+      <ul>
+        <li>StepStella is for iPhone only. It needs iOS 17 or later.</li>
+        <li>It is free. There are no ads and no in-app purchases.</li>
+        <li>You need an internet connection to make a record.</li>
+        <li>The app is available in English, Korean, and Japanese.</li>
+        <li>You must be 14 or older to use StepStella.</li>
+        <li>Your virtual position is not your real location.</li>
+      </ul>
+    </section>
+
+    <section id="en-support-s3">
+      <h2>Getting started</h2>
+      <p>When you open the app for the first time, you go through the steps below. On this page, "the Settings tab" means the <strong>Settings</strong> tab at the bottom of the app. "The iPhone Settings app" means the Settings app that comes with your iPhone.</p>
+      <ol>
+        <li>
+          <strong>Sign in with Apple</strong>
+          <p>On the Create an Account screen, sign in with your Apple Account. There is no other way to sign in. The app does not ask for your Apple Account name or email. In the feed, you appear only as your Anonymous ID. By continuing, you agree to the Terms of Service and Privacy Policy.</p>
+        </li>
+        <li>
+          <strong>Location access (optional)</strong>
+          <p>Location is used only to set your starting city. There is no background location tracking. Only an approximate location (usually the center of your starting city) is saved on the server. You can start and make records without allowing location access.</p>
+        </li>
+        <li>
+          <strong>Allow access to Apple Health</strong>
+          <p>The app reads only your step count and walking + running distance from Apple Health. It does not read other data, like heart rate or sleep. It does not write any data to Apple Health. If you don't allow access, your steps and distance are recorded as 0, but you can still make a record.</p>
+        </li>
+        <li>
+          <strong>Where your journey starts</strong>
+          <p>Check your starting city. The app uses the city center, not your exact home location. To look for your location again, tap <strong>Try Again</strong>. If you're happy with it, tap <strong>Start Here</strong>. You can't change your starting city after you sign up.</p>
+        </li>
+        <li>
+          <strong>Your first record</strong>
+          <p>Your first record stays in your starting city. When you make your first record, you choose a Base Direction from 8 compass directions. You can't change your Base Direction later.</p>
+        </li>
+        <li>
+          <strong>Notifications (optional)</strong>
+          <p>After your first record, the app asks if you want a daily reminder. Your iPhone shows this reminder on its own at the time you choose. The default time is 21:00. If you tap <strong>Not Now</strong>, the app won't ask again for 7 days. To turn the reminder on or off, or to change the time, go to the Settings tab › <strong>Notifications</strong> › <strong>Notification Settings</strong>.</p>
+        </li>
+      </ol>
+      <p>You can see your permission status in the Settings tab › <strong>Permissions</strong>. Tap the Location or Notifications row to open the iPhone Settings app. If you haven't decided on that permission yet, the permission request appears instead.</p>
+    </section>
+
+    <section id="en-support-s4">
+      <h2>FAQ: Steps and records</h2>
+
+      <details class="faq"><summary>I didn't allow access to Apple Health. How do I allow it later?</summary><div>
+        <p>You can still make records without access. Your steps and distance are recorded as 0.</p>
+        <p>To allow access later, open the iPhone Settings app › <strong>Privacy &amp; Security</strong> › <strong>Health</strong> › <strong>StepStella</strong>, and turn on reading steps and distance.</p>
+        <p>Because of Apple's privacy rules, the app can't tell whether Health access is allowed. In the Settings tab › <strong>Permissions</strong>, tap <strong>Health</strong> to see where to check.</p>
+      </div></details>
+
+      <details class="faq"><summary>I walked yesterday. Why do I see 0, or numbers that don't match Apple Health?</summary><div>
+        <p>The numbers can look different from Apple Health because of these rules:</p>
+        <ul>
+          <li>Today's record uses yesterday's total, <strong>from midnight to midnight</strong>. Steps you take today count toward tomorrow's record.</li>
+          <li>"Yesterday" is based on the time zone saved when you signed up. See the <a href="#en-support-s5">time zone question</a>.</li>
+          <li>Steps and distance that you entered by hand in Apple Health are not counted.</li>
+          <li>If your iPhone and Apple Watch both record the same steps, they are counted only once.</li>
+          <li>The daily limit is 100 km and 200,000 steps. If yesterday's total is over the limit, the record is not blocked. It is saved at the limit.</li>
+          <li>If midnight passes after the app reads your steps but before you save, the record is not saved. Please start your record over.</li>
+        </ul>
+        <p>If you see 0, open the iPhone Settings app › <strong>Privacy &amp; Security</strong> › <strong>Health</strong> › <strong>StepStella</strong>, and check that reading steps and distance is on.</p>
+      </div></details>
+
+      <details class="faq"><summary>Why can't I make a record without an internet connection?</summary><div>
+        <p>The date of a record comes from the server's clock, not your iPhone's clock. This stops people from changing their iPhone's clock to fake a streak. So you need an internet connection to make a record.</p>
+        <p>When you are offline, Home shows "You're offline. You can record once you're connected." The feed shows the content it loaded last.</p>
+      </div></details>
+
+      <details class="faq"><summary>How many times a day can I make a record?</summary><div>
+        <p>Once a day. A day starts at midnight in your saved time zone. If you try to record again on the same day, you will see "You've already recorded today."</p>
+      </div></details>
+
+      <details class="faq"><summary>I want to delete a record. Why can I delete only today's record?</summary><div>
+        <p>You can delete only today's record. In the <strong>Log</strong> tab, open today's record and tap <strong>Delete This Record</strong>.</p>
+        <p>Today's virtual position continues from yesterday's virtual position. If a record in the middle were deleted, every position after it would be wrong. So you can't delete past records.</p>
+        <ul>
+          <li>Deleted records can't be recovered.</li>
+          <li>When you delete today's record, your streak and your total distance and steps go back to the values before that record.</li>
+          <li>You can make past records private. See the next question.</li>
+          <li>To delete all your records, you need to delete your account. See <a href="#en-support-s8">Your account and data</a>.</li>
+        </ul>
+      </div></details>
+
+      <details class="faq"><summary>Can I make a past record public or private?</summary><div>
+        <p>Yes. In the <strong>Log</strong> tab, open a record and turn the <strong>Share to Public Feed</strong> switch on or off. This works for past records too.</p>
+        <ul>
+          <li>On means public. The record is visible to Journey Neighbors near your virtual position.</li>
+          <li>Off means private. Only you can see it.</li>
+          <li>New records are public by default. You can change this when you make the record.</li>
+          <li>Public records are shown in the feed for 7 days from the day you record them.</li>
+        </ul>
+      </div></details>
+    </section>
+
+    <section id="en-support-s5">
+      <h2>FAQ: Streaks and your journey</h2>
+
+      <details class="faq"><summary>How do I keep my streak going?</summary><div>
+        <ul>
+          <li>Each day you make a record, your streak grows by one day.</li>
+          <li>If you miss a day, your streak starts over from day 1.</li>
+          <li>A day with 0 steps still continues your streak if you make a record. On that day your distance is 0 km, so you skip choosing a direction.</li>
+          <li>If your streak breaks, your Direction Range also goes back to its starting width (45°).</li>
+        </ul>
+      </div></details>
+
+      <details class="faq"><summary>How do I use Streak Freeze?</summary><div>
+        <p>Streak Freeze protects your streak for one day, as long as it ran through yesterday. Go to the <strong>Log</strong> tab › <strong>Streak</strong> › <strong>Use Streak Freeze</strong>.</p>
+        <p>You can use it only when all of these are true:</p>
+        <ul>
+          <li>You haven't used it yet this month. You can use it once a month.</li>
+          <li>Your current streak is 1 day or more.</li>
+          <li>You haven't recorded today yet.</li>
+          <li>Your last record or your last freeze was yesterday. A streak that broke two or more days ago can't be brought back.</li>
+        </ul>
+        <p>When you use it, today counts as recorded. If you record on a frozen day, your streak grows by one day as usual, and you get this month's Streak Freeze back. "This month" is based on your saved time zone.</p>
+      </div></details>
+
+      <details class="faq"><summary>How does the Direction Range get wider?</summary><div>
+        <p>The Direction Range is the span of directions you can choose when you record. It opens to the left and right of the Base Direction you set on your first record. It gets wider as your streak grows.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Streak</th><th>Direction Range</th></tr></thead>
+          <tbody>
+            <tr><td>0 days</td><td>45°</td></tr>
+            <tr><td>30 days</td><td>90°</td></tr>
+            <tr><td>90 days</td><td>135°</td></tr>
+            <tr><td>180 days</td><td>180°</td></tr>
+            <tr><td>225 days</td><td>225°</td></tr>
+            <tr><td>270 days</td><td>270°</td></tr>
+            <tr><td>315 days</td><td>315°</td></tr>
+            <tr><td>365 days</td><td>360° (any direction)</td></tr>
+          </tbody>
+        </table></div>
+        <p>You can see your current values in the Settings tab › <strong>My Growth</strong> › <strong>Discovery Radius &amp; Direction Range</strong>.</p>
+      </div></details>
+
+      <details class="faq"><summary>How is the Discovery Radius (Journey Neighbors) decided?</summary><div>
+        <p>The Discovery Radius is the area around your virtual position where the app looks for Journey Neighbors. The feed shows public records from the last 7 days inside this radius. You need at least one record of your own to see the feed.</p>
+        <p>Discovery Radius = Base Radius + Streak Bonus + Distance Bonus (up to 50 km)</p>
+        <ul>
+          <li><strong>Base Radius</strong>: 5 km</li>
+          <li><strong>Streak Bonus</strong>: grows a little with each day of your streak, and reaches 35 km at 365 days.</li>
+          <li><strong>Distance Bonus</strong>: adds 1 km for each 1 km in your latest record, up to 10 km.</li>
+          <li>If you miss a day, your Streak Bonus goes back to 0.</li>
+        </ul>
+        <p>For example, on day 1 with 0 km, the radius is about 5.1 km. With an 8-day streak and 4.2 km in your latest record, it is about 10 km. With a 365-day streak and 10 km or more in your latest record, it is 50 km.</p>
+        <p>Feed cards don't show the exact distance. They show the distance between virtual positions as a range.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Distance between virtual positions</th><th>Shown on the card</th></tr></thead>
+          <tbody>
+            <tr><td>Less than 1 km</td><td>Within 1 km</td></tr>
+            <tr><td>1 km to less than 5 km</td><td>Within 5 km</td></tr>
+            <tr><td>5 km to less than 10 km</td><td>Within 10 km</td></tr>
+            <tr><td>10 km or more</td><td>Within Radius</td></tr>
+          </tbody>
+        </table></div>
+        <p>You can see your current values in the Settings tab › <strong>My Growth</strong> › <strong>Discovery Radius &amp; Direction Range</strong>.</p>
+      </div></details>
+
+      <details class="faq"><summary>How far is one trip around the Earth?</summary><div>
+        <p>A total distance of 40,075 km is one trip around the Earth. You can see your progress in the <strong>Journey</strong> tab › <strong>Milestones</strong>, and in the <strong>Log</strong> tab › <strong>Stats</strong> › <strong>Earth Circumnavigation Challenge</strong>.</p>
+      </div></details>
+
+      <details class="faq"><summary>What happens if I travel or change my iPhone's time zone?</summary><div>
+        <p>The date of a record and the range of "yesterday" are based on the time zone saved when you signed up. Changing your iPhone's time zone does not change this.</p>
+        <p>For example, if your saved time zone is Seoul and you are in Los Angeles, your October 9 record uses your steps from midnight to midnight on October 8, Seoul time.</p>
+        <p>In this version, you can't change your saved time zone. You can see it in the Settings tab › <strong>Account</strong> › <strong>Time Zone</strong>.</p>
+      </div></details>
+    </section>
+
+    <section id="en-support-s6">
+      <h2>FAQ: Location and who can see what</h2>
+
+      <details class="faq"><summary>What happens if I don't allow location access?</summary><div>
+        <p>You can still sign up and make records without location access.</p>
+        <ul>
+          <li>Your starting city is set to a major city based on your iPhone's time zone. If no city can be chosen from the time zone, it is set to a major city in the country of your Region setting. If that also fails, it is Seoul.</li>
+          <li>Your records are saved the same way, because the app doesn't use your location when you make a record.</li>
+          <li>You can't change your starting city after you sign up. If you allow location access later, your starting city stays the same.</li>
+        </ul>
+        <p>To allow it later, open the iPhone Settings app › <strong>Privacy &amp; Security</strong> › <strong>Location Services</strong> › <strong>StepStella</strong>. You can also tap the Settings tab › <strong>Permissions</strong> › <strong>Location</strong> to open the iPhone Settings app.</p>
+      </div></details>
+
+      <details class="faq"><summary>Can other people see my exact location?</summary><div>
+        <p>No. Other people can't see your exact location.</p>
+        <ul>
+          <li>The app uses your location only while you're using it ("While Using the App"). It reads your location only when you set your starting city. It doesn't read your location when you make a record.</li>
+          <li>For your starting city, the app saves the city center, not your exact position. If it can't find a city, it saves the center of a nearby area.</li>
+          <li>When you make a record, the app doesn't read your location. Only your virtual position is saved with the record.</li>
+          <li>Feed cards show only a distance range between virtual positions (for example, "Within 5 km"), not coordinates.</li>
+          <li>People who follow you can see the approximate virtual positions of your public records from the last 30 days on the globe. Each position is sent as the center of a square about 5 km wide.</li>
+        </ul>
+        <p>Your virtual position is not your real location. But your first record stays at the center of your starting city. So if your first record is a public record from the last 30 days, people who follow you can tell roughly where your starting city is. If you make your first record private, your followers can't see it.</p>
+      </div></details>
+
+      <details class="faq"><summary>What can other people see on a public record?</summary><div>
+        <p>Public records are shown in Journey Neighbors' feeds for 7 days from the day you record them. A card shows:</p>
+        <ul>
+          <li>Your Anonymous ID (for example, #A3F29C01). There is no real name or profile photo. Your Anonymous ID changes automatically every 90 days.</li>
+          <li>The distance range between virtual positions</li>
+          <li>Yesterday's exact step count and distance</li>
+          <li>Your message (up to 140 characters)</li>
+          <li>The number of likes</li>
+          <li>The date</li>
+        </ul>
+        <p>Only the number of likes is shown. Not even the owner of the record can see who liked it. A follow lasts up to 30 days, and the other person isn't notified.</p>
+        <p>If you don't want to show your steps and distance, make that record private.</p>
+      </div></details>
+    </section>
+
+    <section id="en-support-s7">
+      <h2>FAQ: Reporting and blocking</h2>
+
+      <details class="faq"><summary>How do I report an inappropriate record?</summary><div>
+        <p>In the <strong>Feed</strong> tab, tap <strong>More (…)</strong> on the record card › <strong>Report</strong>, and choose a reason.</p>
+        <ul>
+          <li>Reasons: Spam, Inappropriate Content, Privacy Violation, Other</li>
+          <li>A record you report is removed from your feed right away.</li>
+          <li>You can send up to 10 reports a day.</li>
+          <li>When 3 people report the same record, it is hidden from other people's feeds automatically.</li>
+          <li>You report one record at a time. There is no way to report a user.</li>
+        </ul>
+        <p>You can also email us. Go to the Settings tab › <strong>Support</strong> › <strong>Contact Us</strong>, and keep only "Report an inappropriate record" as the inquiry type.</p>
+        <p>How and when the operator reviews reports: Reports are checked within 48 hours after they are received. Records that break the <a href="https://purple-lamp-236.github.io/walk-log-privacy/#en-terms-s10">Terms of Service</a> are hidden, or their messages are deleted.</p>
+      </div></details>
+
+      <details class="faq"><summary>How do I block another user?</summary><div>
+        <p>In the <strong>Feed</strong> tab, tap <strong>More (…)</strong> on the record card › <strong>Block User</strong> › <strong>Block</strong>.</p>
+        <ul>
+          <li>You and that user will no longer see each other's records in your feeds.</li>
+          <li>Any follows between you end, and you can't follow each other again.</li>
+          <li>The other user is not told that you blocked them.</li>
+          <li><strong>Blocking can't be undone.</strong> There is also no screen that lists blocked users.</li>
+        </ul>
+      </div></details>
+    </section>
+
+    <section id="en-support-s8">
+      <h2>FAQ: Your account and data</h2>
+
+      <details class="faq"><summary>How do I delete my account?</summary><div>
+        <p>Go to the Settings tab › <strong>Account</strong> › <strong>Delete Account</strong>. In the confirmation message, tap <strong>Delete Permanently</strong>, and then confirm with your Apple Account once more.</p>
+        <ul>
+          <li>If you cancel the Apple Account confirmation, nothing is deleted.</li>
+          <li>After you confirm, your account is <strong>deleted right away</strong>. There is no waiting period.</li>
+          <li><strong>This can't be undone.</strong></li>
+        </ul>
+        <p>These are deleted with your account:</p>
+        <ul>
+          <li>Account information: Anonymous ID, time zone, starting city, Base Direction</li>
+          <li>All your records: virtual positions, steps, distance, messages, and public or private settings</li>
+          <li>Your streak and your total distance and steps</li>
+          <li>Follows: people you follow and people who follow you</li>
+          <li>Likes: likes you gave and likes on your records</li>
+          <li>Reports: reports you sent and reports about your records</li>
+          <li>Blocks: users you blocked and users who blocked you</li>
+        </ul>
+        <p>When the deletion is complete, the app signs you out and deletes the cache saved on your iPhone.</p>
+        <p>Some things may remain for a while after deletion:</p>
+        <ul>
+          <li>Server backups: We do not make server backups. So deleted information does not remain in our backups. The Supabase Free plan that runs our server has no automatic backups.</li>
+          <li>Server logs (request records that the server keeps automatically): 1 day (Supabase Free plan)</li>
+          <li>Feed caches on other people's iPhones: your public record cards may remain until they refresh their feed.</li>
+          <li>Emails you sent to us</li>
+        </ul>
+        <p>The app does not delete your Apple Health data or your Apple Account. Raw Health data is never sent to the server.</p>
+        <p>When you delete your account, we ask Apple to remove this app's Sign in with Apple connection. If this request fails, your account is still deleted. If the connection remains, you can remove it yourself on your iPhone. Go to <strong>Settings</strong> › <strong>[your name]</strong> › <strong>Sign in with Apple</strong>, choose this app, and tap <strong>Delete</strong>.</p>
+      </div></details>
+
+      <details class="faq"><summary>If I get a new iPhone, will I keep my records?</summary><div>
+        <p>Your records are saved on the server with your account, not on your iPhone. If you sign in with the same Apple Account on your new iPhone, you can see your records again. Your saved time zone and starting city also stay the same.</p>
+        <p>These settings are saved only on your iPhone. Please set them again on your new iPhone:</p>
+        <ul>
+          <li>Whether the daily reminder is on, and its time</li>
+          <li>Map Marker</li>
+          <li>Appearance</li>
+        </ul>
+        <p>Signing out does not delete your records on the server.</p>
+      </div></details>
+
+      <details class="faq"><summary>Can I export my data?</summary><div>
+        <p>In this version, you can't export your data. You can see your records in the <strong>Log</strong> tab.</p>
+        <p>If you ask by email, we make a file of your account's data and email it to you within 10 days from the day we receive your request. We confirm your identity as described in <a href="https://purple-lamp-236.github.io/walk-log-privacy/#en-privacy-s13">Section 13 of the Privacy Policy</a>.</p>
+      </div></details>
+    </section>
+
+    <section id="en-support-s9">
+      <h2>Privacy Policy and Terms of Service</h2>
+      <ul>
+        <li><a href="https://purple-lamp-236.github.io/walk-log-privacy/#en-privacy">Privacy Policy</a></li>
+        <li><a href="https://purple-lamp-236.github.io/walk-log-privacy/#en-terms">Terms of Service</a></li>
+      </ul>
+      <p>In the app, you can open both documents in the Settings tab › <strong>Privacy</strong> › <strong>Data Policy</strong>. The Create an Account screen also has links to both documents.</p>
+    </section>
+
+    <section id="en-support-s10">
+      <h2>Open source licenses and image credits</h2>
+      <p>You can find the licenses for the open source software and images that the app uses in the Settings tab › <strong>Privacy</strong> › <strong>Data Policy</strong> › <strong>Open Source Licenses</strong>.</p>
+      <ul>
+        <li>Globe: globe.gl, three.js, three-globe</li>
+        <li>Earth images: NASA Blue Marble. The high-resolution Earth image is the July 2004 "Blue Marble: Next Generation" image from NASA, resized for the app. "Image credit: NASA Earth Observatory."</li>
+        <li>Server connection: supabase-swift and related packages</li>
+      </ul>
+      <p>The globe library and Earth images are included in the app. The app does not download them from outside servers while you use it.</p>
+    </section>
+  </div>
+</article>
+<article id="ko" lang="ko" class="lang-section">
+  <div class="doc" id="ko-support">
+    <h1>걸음별자리 지원</h1>
+    <p class="meta">최종 수정: 2026-10-23</p>
+    <nav class="toc" aria-label="목차"><ol>
+      <li><a href="#ko-support-s1">문의하기</a></li>
+      <li><a href="#ko-support-s2">걸음별자리 소개</a></li>
+      <li><a href="#ko-support-s3">시작하기</a></li>
+      <li><a href="#ko-support-s4">자주 묻는 질문: 걸음 수와 기록</a></li>
+      <li><a href="#ko-support-s5">자주 묻는 질문: 연속 기록과 여정</a></li>
+      <li><a href="#ko-support-s6">자주 묻는 질문: 위치와 공개 범위</a></li>
+      <li><a href="#ko-support-s7">자주 묻는 질문: 신고와 차단</a></li>
+      <li><a href="#ko-support-s8">자주 묻는 질문: 계정과 데이터</a></li>
+      <li><a href="#ko-support-s9">개인정보처리방침과 이용약관</a></li>
+      <li><a href="#ko-support-s10">오픈소스 라이선스와 이미지 출처</a></li>
+    </ol></nav>
+
+    <section id="ko-support-s1">
+      <h2>문의하기</h2>
+      <p>궁금한 점이나 문제는 이메일로 알려 주세요.</p>
+      <ul>
+        <li>이메일: <a href="mailto:purple.lamp.236@gmail.com">purple.lamp.236@gmail.com</a></li>
+        <li>답장 예상 시간: 신고는 48시간 안에 확인합니다. 그 밖의 문의는 보통 3일 안에 답장합니다.</li>
+        <li>운영: 개인 개발자 YoungBeom Seo</li>
+      </ul>
+      <h3>앱에서 메일 보내기</h3>
+      <p>앱의 <strong>설정</strong> 탭 › <strong>지원</strong> › <strong>문의하기</strong>를 누르면 메일 앱이 열립니다.</p>
+      <ul>
+        <li>메일 제목은 "[걸음별자리] 문의"로 들어갑니다.</li>
+        <li>본문에는 앱 버전, iOS 버전, 기기 모델, 앱 언어가 미리 들어갑니다.</li>
+        <li>보내기 전에 본문을 보고 필요 없는 내용을 지울 수 있습니다.</li>
+        <li>메일 앱을 열 수 없으면 주소를 복사하는 창이 뜹니다. <strong>주소 복사</strong>를 누른 뒤 다른 메일 앱에서 보내 주세요.</li>
+      </ul>
+      <h3>메일에 적어 주시면 좋은 정보</h3>
+      <ul>
+        <li><strong>기기 모델</strong>: iPhone의 설정 앱 › 일반 › 정보에서 볼 수 있습니다.</li>
+        <li><strong>iOS 버전</strong></li>
+        <li><strong>앱 버전</strong>: 앱 화면에는 버전이 따로 보이지 않습니다. 앱의 문의하기로 메일을 쓰면 자동으로 들어갑니다.</li>
+        <li><strong>문제 상황</strong>: 어떤 화면에서 무엇을 하다가 문제가 생겼는지 적어 주세요. 화면에 보인 문구와 다시 생기게 하는 방법도 적어 주세요.</li>
+      </ul>
+      <p>피드에서 부적절한 기록을 보셨다면 앱의 신고 기능을 쓰거나 메일로 알려 주세요. 신고 방법은 <a href="#ko-support-s7">신고와 차단</a>에 있습니다.</p>
+    </section>
+
+    <section id="ko-support-s2">
+      <h2>걸음별자리 소개</h2>
+      <p>걸음별자리는 하루 한 번 Apple 건강 앱에서 어제의 걸음 수와 이동 거리를 가져오는 iPhone 앱입니다. 고른 방향으로 그 거리만큼 지구 위의 가상 위치를 옮기고, 짧은 메시지를 남깁니다. 매일의 기록은 지구본 위에 별자리처럼 이어지고, 가상 위치가 가까운 다른 사용자("여정 이웃")의 공개 기록을 익명으로 볼 수 있습니다.</p>
+      <ul>
+        <li>iPhone 전용입니다. iOS 17 이상이 필요합니다.</li>
+        <li>무료입니다. 광고와 앱 안 결제가 없습니다.</li>
+        <li>기록하려면 인터넷 연결이 필요합니다.</li>
+        <li>앱 언어는 한국어, 영어, 일본어입니다.</li>
+        <li>만 14세 이상이 쓸 수 있습니다.</li>
+        <li>가상 위치는 실제 위치가 아닙니다.</li>
+      </ul>
+    </section>
+
+    <section id="ko-support-s3">
+      <h2>시작하기</h2>
+      <p>처음 앱을 열면 아래 순서로 준비합니다. 이 페이지에서 "앱의 설정 탭"은 앱 아래쪽의 <strong>설정</strong> 탭을 뜻합니다. "iPhone의 설정 앱"은 iPhone에 기본으로 있는 설정 앱을 뜻합니다.</p>
+      <ol>
+        <li>
+          <strong>Apple로 로그인</strong>
+          <p>계정 만들기 화면에서 Apple 계정으로 로그인합니다. 다른 로그인 방법은 없습니다. 앱은 Apple 계정의 이름과 이메일을 요청하지 않습니다. 피드에는 익명 ID로만 보입니다. 계속하면 이용약관과 개인정보처리방침에 동의한 것으로 봅니다.</p>
+        </li>
+        <li>
+          <strong>위치 접근 (선택)</strong>
+          <p>위치는 여정의 시작 도시를 정할 때만 씁니다. 백그라운드 위치 추적은 하지 않습니다. 서버에는 대략적인 위치(보통 시작 도시의 중심)만 저장합니다. 허용하지 않아도 시작하고 기록할 수 있습니다.</p>
+        </li>
+        <li>
+          <strong>Apple 건강 앱 접근 허용</strong>
+          <p>앱은 건강 앱에서 걸음 수와 걷기·달리기 거리만 읽습니다. 심박수나 수면 같은 다른 데이터는 읽지 않습니다. 건강 데이터를 건강 앱에 쓰지 않습니다. 허용하지 않으면 걸음 수와 이동 거리가 0으로 기록되지만, 기록은 남길 수 있습니다.</p>
+        </li>
+        <li>
+          <strong>여정의 시작점</strong>
+          <p>시작 도시를 확인합니다. 정확한 집 위치가 아니라 도시 중심을 씁니다. 위치를 다시 찾으려면 <strong>다시 찾기</strong>를 누릅니다. 마음에 들면 <strong>이 위치에서 시작</strong>을 누릅니다. 시작 도시는 가입한 뒤에 바꿀 수 없습니다.</p>
+        </li>
+        <li>
+          <strong>첫 기록</strong>
+          <p>첫 기록은 시작 도시에 남습니다. 첫 기록 때 기준 방향을 8방위 가운데 하나로 고릅니다. 기준 방향은 한 번 정하면 바꿀 수 없습니다.</p>
+        </li>
+        <li>
+          <strong>알림 (선택)</strong>
+          <p>첫 기록을 마치면 매일 알림을 받을지 묻습니다. 이 알림은 내가 정한 시각에 iPhone이 스스로 띄웁니다. 기본 시각은 21:00입니다. <strong>나중에</strong>를 누르면 7일 동안 다시 묻지 않습니다. 켜고 끄기와 시각은 앱의 설정 탭 › <strong>알림</strong> › <strong>알림 설정</strong>에서 바꿉니다.</p>
+        </li>
+      </ol>
+      <p>권한 상태는 앱의 설정 탭 › <strong>권한</strong>에서 볼 수 있습니다. 위치와 알림 줄을 누르면 iPhone의 설정 앱이 열립니다. 아직 허용 여부를 정하지 않았으면 설정 앱 대신 권한 요청 창이 뜹니다.</p>
+    </section>
+
+    <section id="ko-support-s4">
+      <h2>자주 묻는 질문: 걸음 수와 기록</h2>
+
+      <details class="faq"><summary>건강 앱 접근을 허용하지 않았어요. 나중에 허용하려면 어떻게 하나요?</summary><div>
+        <p>허용하지 않아도 기록은 남길 수 있습니다. 이때 걸음 수와 이동 거리는 0으로 기록됩니다.</p>
+        <p>나중에 허용하려면 iPhone의 설정 앱 › <strong>개인정보 보호 및 보안</strong> › <strong>건강</strong> › <strong>걸음별자리</strong>에서 걸음 수와 거리 읽기를 켜 주세요.</p>
+        <p>Apple의 개인정보 보호 정책 때문에 앱은 건강 접근을 허용했는지 알 수 없습니다. 앱의 설정 탭 › <strong>권한</strong> › <strong>건강</strong>을 누르면 확인하는 곳을 알려 줍니다.</p>
+      </div></details>
+
+      <details class="faq"><summary>어제 걸었는데 0으로 보이거나, 건강 앱과 숫자가 달라요.</summary><div>
+        <p>아래 규칙 때문에 건강 앱의 숫자와 다르게 보일 수 있습니다.</p>
+        <ul>
+          <li>오늘 기록에는 <strong>어제 0시부터 24시까지</strong>의 합계를 씁니다. 오늘 걸은 걸음은 내일 기록에 들어갑니다.</li>
+          <li>"어제"는 가입할 때 저장한 타임존을 기준으로 정합니다. 자세한 내용은 <a href="#ko-support-s5">타임존 질문</a>에 있습니다.</li>
+          <li>건강 앱에 직접 입력한 걸음과 거리는 빼고 계산합니다.</li>
+          <li>iPhone과 Apple Watch가 같은 걸음을 함께 기록해도 한 번만 셉니다.</li>
+          <li>하루 상한은 거리 100km, 걸음 수 200,000걸음입니다. 상한을 넘으면 기록을 막지 않고 상한 값으로 기록합니다.</li>
+          <li>걸음 수를 읽은 뒤 저장하기 전에 자정이 지나면 저장하지 않습니다. 처음부터 다시 기록해 주세요.</li>
+        </ul>
+        <p>0으로 보이면 iPhone의 설정 앱 › <strong>개인정보 보호 및 보안</strong> › <strong>건강</strong> › <strong>걸음별자리</strong>에서 걸음 수와 거리 읽기가 켜져 있는지 확인해 주세요.</p>
+      </div></details>
+
+      <details class="faq"><summary>인터넷에 연결되지 않으면 왜 기록할 수 없나요?</summary><div>
+        <p>기록 날짜는 iPhone의 시계가 아니라 서버 시각으로 정합니다. iPhone의 시계를 바꿔 연속 기록을 조작하지 못하게 하기 위해서입니다. 그래서 인터넷에 연결되어 있어야 기록할 수 있습니다.</p>
+        <p>오프라인일 때 홈 화면에는 "오프라인 상태예요. 기록은 인터넷 연결 후 가능해요."라는 안내가 보입니다. 피드는 마지막으로 불러온 내용을 보여 줍니다.</p>
+      </div></details>
+
+      <details class="faq"><summary>하루에 몇 번 기록할 수 있나요?</summary><div>
+        <p>하루에 한 번입니다. 하루는 저장한 타임존의 자정을 기준으로 나눕니다. 이미 기록한 날에 다시 기록하면 "오늘은 이미 기록했어요."라는 안내가 보입니다.</p>
+      </div></details>
+
+      <details class="faq"><summary>기록을 지우고 싶어요. 왜 오늘 기록만 지울 수 있나요?</summary><div>
+        <p>오늘 기록만 지울 수 있습니다. <strong>기록</strong> 탭에서 오늘 기록을 고른 뒤 <strong>이 기록 삭제</strong>를 누릅니다.</p>
+        <p>오늘의 가상 위치는 어제의 가상 위치에서 이어집니다. 중간의 기록을 지우면 그 뒤의 위치가 모두 틀어집니다. 그래서 지난 기록은 지울 수 없습니다.</p>
+        <ul>
+          <li>지운 기록은 복구할 수 없습니다.</li>
+          <li>오늘 기록을 지우면 연속 기록과 누적 거리·걸음 수도 기록하기 전 값으로 돌아갑니다.</li>
+          <li>지난 기록은 비공개로 바꿀 수 있습니다. 아래 질문을 참고해 주세요.</li>
+          <li>모든 기록을 지우려면 계정을 삭제해야 합니다. 방법은 <a href="#ko-support-s8">계정과 데이터</a>에 있습니다.</li>
+        </ul>
+      </div></details>
+
+      <details class="faq"><summary>지난 기록을 공개하거나 비공개로 바꿀 수 있나요?</summary><div>
+        <p>네. <strong>기록</strong> 탭에서 기록을 고른 뒤 <strong>공개 피드에 공유</strong> 스위치를 켜거나 끕니다. 지난 기록도 바꿀 수 있습니다.</p>
+        <ul>
+          <li>켜면 공개입니다. 가상 위치가 가까운 여정 이웃에게 보입니다.</li>
+          <li>끄면 비공개입니다. 나만 볼 수 있습니다.</li>
+          <li>새 기록은 처음에 공개로 정해져 있습니다. 기록할 때 바꿀 수 있습니다.</li>
+          <li>공개 기록은 기록한 날부터 7일 동안 피드에 보입니다.</li>
+        </ul>
+      </div></details>
+    </section>
+
+    <section id="ko-support-s5">
+      <h2>자주 묻는 질문: 연속 기록과 여정</h2>
+
+      <details class="faq"><summary>연속 기록은 어떻게 이어지나요?</summary><div>
+        <ul>
+          <li>매일 기록하면 연속 기록이 하루씩 늘어납니다.</li>
+          <li>하루라도 기록하지 않으면 연속 기록은 1일부터 다시 시작합니다.</li>
+          <li>걸음 수가 0인 날도 기록하면 연속 기록이 이어집니다. 이날은 이동 거리가 0km라서 방향 선택을 건너뜁니다.</li>
+          <li>연속 기록이 끊기면 방향 범위도 처음 폭(45°)으로 돌아갑니다.</li>
+        </ul>
+      </div></details>
+
+      <details class="faq"><summary>연속 기록 보호는 어떻게 쓰나요?</summary><div>
+        <p>연속 기록 보호는 어제까지 이어진 연속 기록을 하루 지켜 줍니다. <strong>기록</strong> 탭 › <strong>연속 기록</strong> › <strong>연속 기록 보호 사용하기</strong>를 누릅니다.</p>
+        <p>아래 조건을 모두 만족할 때 쓸 수 있습니다.</p>
+        <ul>
+          <li>이번 달에 아직 쓰지 않았습니다. 한 달에 한 번 쓸 수 있습니다.</li>
+          <li>현재 연속 기록이 1일 이상입니다.</li>
+          <li>오늘 아직 기록하지 않았습니다.</li>
+          <li>마지막 기록일이나 마지막 보호일이 어제입니다. 이틀 이상 끊어진 연속 기록은 되살릴 수 없습니다.</li>
+        </ul>
+        <p>보호를 쓰면 오늘 날짜를 기록한 것으로 처리합니다. 보호한 날에 기록하면 연속 기록이 평소처럼 하루 늘고, 이번 달 보호 기회를 돌려받습니다. "이번 달"은 저장한 타임존을 기준으로 정합니다.</p>
+      </div></details>
+
+      <details class="faq"><summary>방향 범위는 어떻게 넓어지나요?</summary><div>
+        <p>방향 범위는 기록할 때 고를 수 있는 방향의 폭입니다. 첫 기록 때 정한 기준 방향을 가운데에 두고 좌우로 넓어집니다. 연속 기록이 길수록 넓어집니다.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>연속 기록</th><th>방향 범위</th></tr></thead>
+          <tbody>
+            <tr><td>0일</td><td>45°</td></tr>
+            <tr><td>30일</td><td>90°</td></tr>
+            <tr><td>90일</td><td>135°</td></tr>
+            <tr><td>180일</td><td>180°</td></tr>
+            <tr><td>225일</td><td>225°</td></tr>
+            <tr><td>270일</td><td>270°</td></tr>
+            <tr><td>315일</td><td>315°</td></tr>
+            <tr><td>365일</td><td>360° (모든 방향)</td></tr>
+          </tbody>
+        </table></div>
+        <p>지금 값은 앱의 설정 탭 › <strong>내 성장</strong> › <strong>탐색 반경 &amp; 방향 범위</strong>에서 볼 수 있습니다.</p>
+      </div></details>
+
+      <details class="faq"><summary>탐색 반경(여정 이웃)은 어떻게 정해지나요?</summary><div>
+        <p>탐색 반경은 내 가상 위치를 중심으로 여정 이웃을 찾는 범위입니다. 피드에는 이 반경 안에 있는 최근 7일의 공개 기록이 보입니다. 피드는 내 기록이 하나 이상 있어야 보입니다.</p>
+        <p>탐색 반경 = 기본 반경 + 연속 기록 보너스 + 거리 보너스 (최대 50km)</p>
+        <ul>
+          <li><strong>기본 반경</strong>: 5km</li>
+          <li><strong>연속 기록 보너스</strong>: 연속 기록이 하루 늘 때마다 조금씩 늘고, 365일이 되면 35km가 됩니다.</li>
+          <li><strong>거리 보너스</strong>: 마지막 기록의 이동 거리 1km마다 1km씩, 최대 10km까지 더합니다.</li>
+          <li>하루라도 기록을 쉬면 연속 기록 보너스는 0이 됩니다.</li>
+        </ul>
+        <p>예를 들어 첫날 0km를 기록하면 약 5.1km입니다. 8일 연속으로 기록하고 마지막에 4.2km를 걸었으면 약 10km입니다. 365일 연속으로 기록하고 마지막에 10km 이상 걸었으면 50km입니다.</p>
+        <p>피드 카드에는 정확한 거리 대신 가상 위치 사이의 거리 범위가 보입니다.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>가상 위치 사이의 거리</th><th>카드에 보이는 문구</th></tr></thead>
+          <tbody>
+            <tr><td>1km 미만</td><td>1km 이내</td></tr>
+            <tr><td>1km 이상 5km 미만</td><td>5km 이내</td></tr>
+            <tr><td>5km 이상 10km 미만</td><td>10km 이내</td></tr>
+            <tr><td>10km 이상</td><td>반경 안</td></tr>
+          </tbody>
+        </table></div>
+        <p>지금 값은 앱의 설정 탭 › <strong>내 성장</strong> › <strong>탐색 반경 &amp; 방향 범위</strong>에서 볼 수 있습니다.</p>
+      </div></details>
+
+      <details class="faq"><summary>지구 한 바퀴는 몇 km인가요?</summary><div>
+        <p>누적 이동 거리 40,075km가 지구 한 바퀴입니다. 진행 상황은 <strong>여정</strong> 탭 › <strong>이정표</strong>와 <strong>기록</strong> 탭 › <strong>통계</strong> › <strong>지구 한 바퀴 도전</strong>에서 볼 수 있습니다.</p>
+      </div></details>
+
+      <details class="faq"><summary>여행을 가거나 iPhone의 시간대를 바꾸면 어떻게 되나요?</summary><div>
+        <p>기록 날짜와 "어제"의 범위는 가입할 때 저장한 타임존을 기준으로 정합니다. iPhone의 시간대를 바꿔도 이 기준은 바뀌지 않습니다.</p>
+        <p>예를 들어 저장한 타임존이 서울이면, 로스앤젤레스에 있어도 10월 9일 기록에는 서울 기준 10월 8일 0시부터 24시까지의 걸음이 들어갑니다.</p>
+        <p>지금 버전에는 저장한 타임존을 바꾸는 기능이 없습니다. 저장한 타임존은 앱의 설정 탭 › <strong>계정 관리</strong> › <strong>타임존</strong>에서 볼 수 있습니다.</p>
+      </div></details>
+    </section>
+
+    <section id="ko-support-s6">
+      <h2>자주 묻는 질문: 위치와 공개 범위</h2>
+
+      <details class="faq"><summary>위치 접근을 허용하지 않으면 어떻게 되나요?</summary><div>
+        <p>위치 접근을 허용하지 않아도 가입하고 기록할 수 있습니다.</p>
+        <ul>
+          <li>시작 도시는 iPhone의 시간대 설정으로 고른 대표 도시가 됩니다. 시간대로 고를 수 없으면 지역 설정 국가의 대표 도시가 됩니다. 그래도 고를 수 없으면 서울이 됩니다.</li>
+          <li>기록은 똑같이 저장됩니다. 기록할 때는 위치를 쓰지 않기 때문입니다.</li>
+          <li>시작 도시는 가입한 뒤에 바꿀 수 없습니다. 나중에 위치를 허용해도 시작 도시는 그대로입니다.</li>
+        </ul>
+        <p>나중에 허용하려면 iPhone의 설정 앱 › <strong>개인정보 보호 및 보안</strong> › <strong>위치 서비스</strong> › <strong>걸음별자리</strong>에서 바꿉니다. 앱의 설정 탭 › <strong>권한</strong> › <strong>위치</strong>를 눌러도 iPhone의 설정 앱이 열립니다.</p>
+      </div></details>
+
+      <details class="faq"><summary>다른 사용자가 내 정확한 위치를 볼 수 있나요?</summary><div>
+        <p>아니요. 다른 사용자는 내 정확한 위치를 볼 수 없습니다.</p>
+        <ul>
+          <li>앱은 "앱을 사용하는 동안"에만 위치를 씁니다. 시작 도시를 정할 때만 위치를 읽고, 기록할 때는 읽지 않습니다.</li>
+          <li>시작 도시에는 정확한 좌표 대신 도시 중심을 저장합니다. 도시를 찾지 못하면 근처 지역의 중심을 저장합니다.</li>
+          <li>기록할 때는 위치를 읽지 않습니다. 기록에는 가상 위치만 저장합니다.</li>
+          <li>피드 카드에는 좌표 대신 가상 위치 사이의 거리 범위(예: "5km 이내")만 보입니다.</li>
+          <li>나를 팔로우한 사람은 내 최근 30일 공개 기록의 가상 위치를 지구본에서 대략 봅니다. 위치는 약 5km 크기 칸의 중심으로 바꿔서 보냅니다.</li>
+        </ul>
+        <p>가상 위치는 실제 위치가 아닙니다. 다만 첫 기록은 시작 도시 중심에 남습니다. 그래서 첫 기록이 최근 30일 안의 공개 기록이면, 나를 팔로우한 사람은 내 시작 도시 근처를 알 수 있습니다. 첫 기록을 비공개로 바꾸면 팔로워에게 보이지 않습니다.</p>
+      </div></details>
+
+      <details class="faq"><summary>공개 기록에는 무엇이 보이나요?</summary><div>
+        <p>공개 기록은 기록한 날부터 7일 동안 여정 이웃의 피드에 보입니다. 카드에는 아래 내용이 보입니다.</p>
+        <ul>
+          <li>익명 ID (예: #A3F29C01). 실명과 프로필 사진은 없습니다. 익명 ID는 90일마다 자동으로 바뀝니다.</li>
+          <li>가상 위치 사이의 거리 범위</li>
+          <li>어제의 정확한 걸음 수와 이동 거리</li>
+          <li>메시지 (최대 140자)</li>
+          <li>좋아요 수</li>
+          <li>날짜</li>
+        </ul>
+        <p>좋아요는 개수만 보입니다. 누가 눌렀는지는 기록 주인도 볼 수 없습니다. 팔로우는 최대 30일 동안 이어지고, 상대방에게 알림이 가지 않습니다.</p>
+        <p>걸음 수와 거리를 보이고 싶지 않으면 그 기록을 비공개로 바꿔 주세요.</p>
+      </div></details>
+    </section>
+
+    <section id="ko-support-s7">
+      <h2>자주 묻는 질문: 신고와 차단</h2>
+
+      <details class="faq"><summary>부적절한 기록을 신고하려면 어떻게 하나요?</summary><div>
+        <p><strong>피드</strong> 탭에서 기록 카드의 <strong>더 보기(…)</strong> › <strong>신고</strong>를 누르고 이유를 고릅니다.</p>
+        <ul>
+          <li>이유: 스팸, 부적절한 내용, 개인정보 침해, 기타</li>
+          <li>신고한 기록은 내 피드에서 바로 빠집니다.</li>
+          <li>신고는 하루에 10건까지 할 수 있습니다.</li>
+          <li>한 기록을 3명이 신고하면 그 기록은 다른 사용자의 피드에서 자동으로 숨겨집니다.</li>
+          <li>신고는 기록 하나씩 합니다. 사용자를 신고하는 기능은 없습니다.</li>
+        </ul>
+        <p>메일로도 알려 주실 수 있습니다. 앱의 설정 탭 › <strong>지원</strong> › <strong>문의하기</strong>에서 "부적절한 기록 신고"를 남겨 주세요.</p>
+        <p>운영자가 신고를 검토하는 방법과 기간: 신고를 받은 뒤 48시간 안에 확인합니다. <a href="https://purple-lamp-236.github.io/walk-log-privacy/#ko-terms-s10">이용약관</a>을 어긴 기록은 숨기거나 메시지를 지웁니다.</p>
+      </div></details>
+
+      <details class="faq"><summary>다른 사용자를 차단하려면 어떻게 하나요?</summary><div>
+        <p><strong>피드</strong> 탭에서 기록 카드의 <strong>더 보기(…)</strong> › <strong>이 사용자 차단</strong> › <strong>차단</strong>을 누릅니다.</p>
+        <ul>
+          <li>서로의 기록이 서로의 피드에 더 이상 보이지 않습니다.</li>
+          <li>두 사람 사이의 팔로우가 모두 끊어지고, 다시 팔로우할 수 없습니다.</li>
+          <li>차단한 사실을 상대방에게 알리지 않습니다.</li>
+          <li><strong>차단은 되돌릴 수 없습니다.</strong> 차단 목록을 보는 화면도 없습니다.</li>
+        </ul>
+      </div></details>
+    </section>
+
+    <section id="ko-support-s8">
+      <h2>자주 묻는 질문: 계정과 데이터</h2>
+
+      <details class="faq"><summary>계정을 삭제하려면 어떻게 하나요?</summary><div>
+        <p>앱의 설정 탭 › <strong>계정 관리</strong> › <strong>계정 삭제</strong>를 누릅니다. 확인 창에서 <strong>영구 삭제</strong>를 누른 뒤, Apple 계정 확인을 한 번 더 합니다.</p>
+        <ul>
+          <li>Apple 계정 확인 창에서 취소하면 아무것도 지우지 않습니다.</li>
+          <li>확인을 마치면 <strong>바로 삭제</strong>합니다. 기다리는 기간은 없습니다.</li>
+          <li><strong>삭제는 되돌릴 수 없습니다.</strong></li>
+        </ul>
+        <p>계정과 함께 지워지는 것:</p>
+        <ul>
+          <li>계정 정보: 익명 ID, 타임존, 시작 도시, 기준 방향</li>
+          <li>모든 기록: 가상 위치, 걸음 수, 이동 거리, 메시지, 공개 여부</li>
+          <li>연속 기록과 누적 거리·걸음 수</li>
+          <li>팔로우: 내가 팔로우한 것과 나를 팔로우한 것</li>
+          <li>좋아요: 내가 누른 것과 내 기록에 받은 것</li>
+          <li>신고: 내가 한 신고와 내 기록에 대한 신고</li>
+          <li>차단: 내가 한 차단과 나를 차단한 것</li>
+        </ul>
+        <p>삭제를 마치면 앱은 로그아웃하고 iPhone에 저장한 캐시를 지웁니다.</p>
+        <p>삭제한 뒤에도 잠시 남을 수 있는 것:</p>
+        <ul>
+          <li>서버 백업: 운영자는 서버 백업을 만들지 않습니다. 그래서 삭제한 정보는 운영자의 백업에 남지 않습니다. 서버가 쓰는 Supabase 무료 플랜에는 자동 백업이 없습니다.</li>
+          <li>서버 로그(서버가 자동으로 남기는 요청 기록): 1일(Supabase 무료 플랜 기준)</li>
+          <li>다른 사용자 iPhone의 피드 캐시: 그 사용자가 피드를 새로 고칠 때까지 내 공개 기록 카드가 남을 수 있습니다.</li>
+          <li>운영자에게 보낸 문의 메일</li>
+        </ul>
+        <p>건강 앱의 데이터와 Apple 계정은 앱이 지우지 않습니다. 건강 데이터 원본은 처음부터 서버로 보내지 않습니다.</p>
+        <p>계정을 삭제하면 운영자는 Apple에 이 앱의 Apple로 로그인 연결을 끊어 달라고 요청합니다. 이 요청이 실패해도 계정은 삭제됩니다. 연결이 남아 있으면 iPhone에서 직접 해제할 수 있습니다. <strong>설정</strong> › <strong>[사용자 이름]</strong> › <strong>Apple로 로그인</strong>에서 이 앱을 고른 뒤 <strong>삭제</strong>를 누릅니다.</p>
+      </div></details>
+
+      <details class="faq"><summary>iPhone을 바꾸면 기록이 남나요?</summary><div>
+        <p>기록은 iPhone이 아니라 서버에 계정과 함께 저장합니다. 새 iPhone에서 같은 Apple 계정으로 로그인하면 기록을 다시 볼 수 있습니다. 저장한 타임존과 시작 도시도 그대로입니다.</p>
+        <p>아래 설정은 iPhone에만 저장합니다. 새 iPhone에서 다시 정해 주세요.</p>
+        <ul>
+          <li>매일 알림을 켤지와 알림 시각</li>
+          <li>지도 위치 모양</li>
+          <li>화면 모드</li>
+        </ul>
+        <p>로그아웃해도 서버의 기록은 지워지지 않습니다.</p>
+      </div></details>
+
+      <details class="faq"><summary>내 데이터를 내보낼 수 있나요?</summary><div>
+        <p>지금 버전에는 데이터를 내보내는 기능이 없습니다. 내 기록은 <strong>기록</strong> 탭에서 볼 수 있습니다.</p>
+        <p>메일로 요청하면 운영자가 그 계정의 데이터를 파일로 만들어, 요청을 받은 날부터 10일 안에 메일로 보냅니다. 본인 확인 방법은 <a href="https://purple-lamp-236.github.io/walk-log-privacy/#ko-privacy-s13">개인정보처리방침 13절</a>을 따릅니다.</p>
+      </div></details>
+    </section>
+
+    <section id="ko-support-s9">
+      <h2>개인정보처리방침과 이용약관</h2>
+      <ul>
+        <li><a href="https://purple-lamp-236.github.io/walk-log-privacy/#ko-privacy">개인정보처리방침</a></li>
+        <li><a href="https://purple-lamp-236.github.io/walk-log-privacy/#ko-terms">이용약관</a></li>
+      </ul>
+      <p>앱 안에서는 앱의 설정 탭 › <strong>개인정보</strong> › <strong>데이터 정책</strong>에서 두 문서를 열 수 있습니다. 계정 만들기 화면에도 두 문서의 링크가 있습니다.</p>
+    </section>
+
+    <section id="ko-support-s10">
+      <h2>오픈소스 라이선스와 이미지 출처</h2>
+      <p>앱이 쓰는 오픈소스 소프트웨어와 이미지의 라이선스는 앱의 설정 탭 › <strong>개인정보</strong> › <strong>데이터 정책</strong> › <strong>오픈소스 라이선스</strong>에서 볼 수 있습니다.</p>
+      <ul>
+        <li>지구본: globe.gl, three.js, three-globe</li>
+        <li>지구 사진: NASA Blue Marble. 고해상도 지구 사진은 NASA의 2004년 7월 "Blue Marble: Next Generation" 영상을 앱에 맞게 줄인 것입니다. "Image credit: NASA Earth Observatory."</li>
+        <li>서버 연결: supabase-swift와 관련 패키지</li>
+      </ul>
+      <p>지구본 라이브러리와 지구 사진은 앱 안에 들어 있습니다. 앱을 쓰는 동안 외부 서버에서 받지 않습니다.</p>
+    </section>
+  </div>
+</article>
+<article id="ja" lang="ja" class="lang-section">
+  <div class="doc" id="ja-support">
+    <h1>StepStella サポート</h1>
+    <p class="meta">最終更新日：2026-10-23</p>
+    <nav class="toc" aria-label="目次"><ol>
+      <li><a href="#ja-support-s1">お問い合わせ</a></li>
+      <li><a href="#ja-support-s2">StepStellaについて</a></li>
+      <li><a href="#ja-support-s3">はじめかた</a></li>
+      <li><a href="#ja-support-s4">よくある質問：歩数と記録</a></li>
+      <li><a href="#ja-support-s5">よくある質問：連続記録と旅</a></li>
+      <li><a href="#ja-support-s6">よくある質問：位置情報と公開範囲</a></li>
+      <li><a href="#ja-support-s7">よくある質問：報告とブロック</a></li>
+      <li><a href="#ja-support-s8">よくある質問：アカウントとデータ</a></li>
+      <li><a href="#ja-support-s9">プライバシーポリシーと利用規約</a></li>
+      <li><a href="#ja-support-s10">オープンソースライセンスと画像のクレジット</a></li>
+    </ol></nav>
+
+    <section id="ja-support-s1">
+      <h2>お問い合わせ</h2>
+      <p>ご不明な点や問題がありましたら、メールでお知らせください。</p>
+      <ul>
+        <li>メール：<a href="mailto:purple.lamp.236@gmail.com">purple.lamp.236@gmail.com</a></li>
+        <li>返信までの目安：報告は48時間以内に確認します。そのほかのお問い合わせには、通常3日以内に返信します。</li>
+        <li>運営：個人開発者 YoungBeom Seo</li>
+      </ul>
+      <h3>アプリからメールを送る</h3>
+      <p>アプリの<strong>設定</strong>タブ › <strong>サポート</strong> › <strong>お問い合わせ</strong>をタップすると、「メール」Appが開きます。</p>
+      <ul>
+        <li>件名は「[StepStella] お問い合わせ」になります。</li>
+        <li>本文には、アプリのバージョン、iOSのバージョン、デバイスのモデル、アプリの言語があらかじめ入力されます。</li>
+        <li>送信する前に本文を確認して、不要な内容を削除できます。</li>
+        <li>「メール」Appを開けない場合は、アドレスをコピーする画面が表示されます。<strong>アドレスをコピー</strong>をタップして、ほかのメールアプリから送ってください。</li>
+      </ul>
+      <h3>メールに書いていただきたい情報</h3>
+      <ul>
+        <li><strong>デバイスのモデル</strong>：iPhoneの「設定」App › 一般 › 情報で確認できます。</li>
+        <li><strong>iOSのバージョン</strong></li>
+        <li><strong>アプリのバージョン</strong>：アプリの画面にはバージョンが表示されません。アプリの「お問い合わせ」からメールを作成すると、自動で入力されます。</li>
+        <li><strong>問題の内容</strong>：どの画面で何をしていたときに問題が起きたかを書いてください。画面に表示されたメッセージと、問題を再現する手順も書いてください。</li>
+      </ul>
+      <p>フィードで不適切な記録を見つけた場合は、アプリの報告機能を使うか、メールでお知らせください。報告の方法は、<a href="#ja-support-s7">報告とブロック</a>をご覧ください。</p>
+    </section>
+
+    <section id="ja-support-s2">
+      <h2>StepStellaについて</h2>
+      <p>StepStellaは、1日1回、Appleの「ヘルスケア」Appから昨日の歩数と移動距離を読み取るiPhoneアプリです。選んだ方向にその距離だけ地球上の仮想位置を動かし、短いメッセージを残します。毎日の記録は地球儀の上で星座のようにつながり、仮想位置が近いほかのユーザー（「旅の隣人」）の公開記録を匿名で見ることができます。</p>
+      <ul>
+        <li>iPhone専用です。iOS 17以降が必要です。</li>
+        <li>無料です。広告もアプリ内課金もありません。</li>
+        <li>記録するにはインターネット接続が必要です。</li>
+        <li>アプリは日本語、英語、韓国語に対応しています。</li>
+        <li>満14歳以上の方が利用できます。</li>
+        <li>仮想位置は実際の位置ではありません。</li>
+      </ul>
+    </section>
+
+    <section id="ja-support-s3">
+      <h2>はじめかた</h2>
+      <p>初めてアプリを開くと、次の手順で準備します。このページの「アプリの設定タブ」は、アプリ下部の<strong>設定</strong>タブのことです。「iPhoneの『設定』アプリ」は、iPhoneに最初から入っている「設定」Appのことです。</p>
+      <ol>
+        <li>
+          <strong>Appleでサインイン</strong>
+          <p>「アカウントを作成」画面で、Appleアカウントでサインインします。ほかのサインイン方法はありません。アプリはAppleアカウントの名前とメールアドレスを求めません。フィードには匿名IDだけが表示されます。続けると、利用規約とプライバシーポリシーに同意したものとみなされます。</p>
+        </li>
+        <li>
+          <strong>位置情報へのアクセス（任意）</strong>
+          <p>位置情報は、旅の出発都市を決めるときにだけ使います。バックグラウンドで位置情報を追跡することはありません。サーバーにはおおよその位置（通常は出発都市の中心）だけを保存します。許可しなくても、始めることも記録することもできます。</p>
+        </li>
+        <li>
+          <strong>ヘルスケアへのアクセスを許可</strong>
+          <p>アプリはヘルスケアから歩数と、ウォーキング・ランニングの距離だけを読み取ります。心拍数や睡眠など、ほかのデータは読み取りません。ヘルスケアにデータを書き込みません。許可しないと歩数と移動距離が0として記録されますが、それでも記録は残せます。</p>
+        </li>
+        <li>
+          <strong>旅の出発地点</strong>
+          <p>出発都市を確認します。正確な自宅の位置ではなく、都市の中心を使います。位置をもう一度探すには<strong>もう一度探す</strong>をタップします。問題なければ<strong>ここから出発</strong>をタップします。出発都市は登録した後に変更できません。</p>
+        </li>
+        <li>
+          <strong>最初の記録</strong>
+          <p>最初の記録は出発都市に残ります。最初の記録のときに、8つの方位から基準方向を1つ選びます。基準方向は一度決めると変更できません。</p>
+        </li>
+        <li>
+          <strong>通知（任意）</strong>
+          <p>最初の記録が終わると、毎日の通知を受け取るかどうかを確認します。この通知は、指定した時刻にiPhone本体が表示します。初期設定の時刻は21:00です。<strong>今はしない</strong>をタップすると、7日間は再び確認しません。オン・オフと時刻は、アプリの設定タブ › <strong>通知</strong> › <strong>通知設定</strong>で変更します。</p>
+        </li>
+      </ol>
+      <p>アクセス許可の状態は、アプリの設定タブ › <strong>アクセス許可</strong>で確認できます。位置情報と通知の行をタップすると、iPhoneの「設定」Appが開きます。まだ許可するかどうかを決めていない場合は、「設定」Appの代わりに許可を求める画面が表示されます。</p>
+    </section>
+
+    <section id="ja-support-s4">
+      <h2>よくある質問：歩数と記録</h2>
+
+      <details class="faq"><summary>ヘルスケアへのアクセスを許可しませんでした。後から許可するにはどうすればよいですか？</summary><div>
+        <p>許可しなくても記録は残せます。その場合、歩数と移動距離は0として記録されます。</p>
+        <p>後から許可するには、iPhoneの「設定」App › <strong>プライバシーとセキュリティ</strong> › <strong>ヘルスケア</strong> › <strong>StepStella</strong>で、歩数と距離の読み取りをオンにしてください。</p>
+        <p>Appleのプライバシー保護のルールにより、ヘルスケアへのアクセスが許可されているかどうかはアプリから確認できません。アプリの設定タブ › <strong>アクセス許可</strong> › <strong>ヘルスケア</strong>をタップすると、確認する場所が表示されます。</p>
+      </div></details>
+
+      <details class="faq"><summary>昨日歩いたのに、0と表示されたり、ヘルスケアの数字と違ったりします。</summary><div>
+        <p>次のルールにより、ヘルスケアの数字と違って見えることがあります。</p>
+        <ul>
+          <li>今日の記録には、<strong>昨日の0時から24時まで</strong>の合計を使います。今日歩いた分は、明日の記録に入ります。</li>
+          <li>「昨日」は、登録したときに保存したタイムゾーンを基準に決めます。詳しくは<a href="#ja-support-s5">タイムゾーンの質問</a>をご覧ください。</li>
+          <li>ヘルスケアに手動で入力した歩数と距離は、計算に含めません。</li>
+          <li>iPhoneとApple Watchが同じ歩数を両方で記録しても、1回だけ数えます。</li>
+          <li>1日の上限は、距離100km、歩数200,000歩です。上限を超えても記録はでき、上限の値で記録されます。</li>
+          <li>歩数を読み取った後、保存する前に0時を過ぎると、保存されません。最初から記録し直してください。</li>
+        </ul>
+        <p>0と表示される場合は、iPhoneの「設定」App › <strong>プライバシーとセキュリティ</strong> › <strong>ヘルスケア</strong> › <strong>StepStella</strong>で、歩数と距離の読み取りがオンになっているか確認してください。</p>
+      </div></details>
+
+      <details class="faq"><summary>インターネットに接続していないと記録できないのはなぜですか？</summary><div>
+        <p>記録の日付は、iPhoneの時計ではなくサーバーの時刻で決めます。iPhoneの時計を変えて連続記録をごまかせないようにするためです。そのため、インターネットに接続しているときだけ記録できます。</p>
+        <p>オフラインのときは、ホームに「オフラインです。インターネットに接続すると記録できます。」と表示されます。フィードは最後に読み込んだ内容を表示します。</p>
+      </div></details>
+
+      <details class="faq"><summary>1日に何回記録できますか？</summary><div>
+        <p>1日1回です。1日は、保存したタイムゾーンの0時で区切ります。同じ日にもう一度記録しようとすると、「今日はすでに記録しました。」と表示されます。</p>
+      </div></details>
+
+      <details class="faq"><summary>記録を削除したいです。なぜ今日の記録しか削除できないのですか？</summary><div>
+        <p>削除できるのは今日の記録だけです。<strong>記録</strong>タブで今日の記録を開き、<strong>この記録を削除</strong>をタップします。</p>
+        <p>今日の仮想位置は、昨日の仮想位置から続いています。途中の記録を削除すると、その後の位置がすべてずれてしまいます。そのため、過去の記録は削除できません。</p>
+        <ul>
+          <li>削除した記録は復元できません。</li>
+          <li>今日の記録を削除すると、連続記録と累計の距離・歩数も、記録する前の値に戻ります。</li>
+          <li>過去の記録は非公開に変更できます。次の質問をご覧ください。</li>
+          <li>すべての記録を削除するには、アカウントを削除する必要があります。方法は、<a href="#ja-support-s8">アカウントとデータ</a>をご覧ください。</li>
+        </ul>
+      </div></details>
+
+      <details class="faq"><summary>過去の記録を公開・非公開に変更できますか？</summary><div>
+        <p>はい。<strong>記録</strong>タブで記録を開き、<strong>公開フィードに共有</strong>のスイッチをオンまたはオフにします。過去の記録も変更できます。</p>
+        <ul>
+          <li>オンは公開です。仮想位置が近い旅の隣人に表示されます。</li>
+          <li>オフは非公開です。自分だけに表示されます。</li>
+          <li>新しい記録は、初期設定では公開になっています。記録するときに変更できます。</li>
+          <li>公開記録は、記録した日から7日間フィードに表示されます。</li>
+        </ul>
+      </div></details>
+    </section>
+
+    <section id="ja-support-s5">
+      <h2>よくある質問：連続記録と旅</h2>
+
+      <details class="faq"><summary>連続記録はどうすれば続きますか？</summary><div>
+        <ul>
+          <li>毎日記録すると、連続記録が1日ずつ増えます。</li>
+          <li>1日でも記録しないと、連続記録は1日目からやり直しになります。</li>
+          <li>歩数が0の日でも、記録すれば連続記録は続きます。この日は移動距離が0kmなので、方向の選択はスキップされます。</li>
+          <li>連続記録が途切れると、方向範囲も最初の幅（45°）に戻ります。</li>
+        </ul>
+      </div></details>
+
+      <details class="faq"><summary>連続記録の保護はどのように使いますか？</summary><div>
+        <p>連続記録の保護は、昨日まで続いた連続記録を1日守ります。<strong>記録</strong>タブ › <strong>連続記録</strong> › <strong>連続記録の保護を使う</strong>をタップします。</p>
+        <p>次の条件をすべて満たすときに使えます。</p>
+        <ul>
+          <li>今月まだ使っていません。月に1回使えます。</li>
+          <li>現在の連続記録が1日以上です。</li>
+          <li>今日はまだ記録していません。</li>
+          <li>最後の記録日、または最後に保護した日が昨日です。2日以上途切れた連続記録は元に戻せません。</li>
+        </ul>
+        <p>保護を使うと、今日を記録済みとして扱います。保護した日に記録すると、連続記録はいつもどおり1日増え、今月の保護をもう一度使えるようになります。「今月」は、保存したタイムゾーンを基準に決めます。</p>
+      </div></details>
+
+      <details class="faq"><summary>方向範囲はどのように広がりますか？</summary><div>
+        <p>方向範囲は、記録するときに選べる方向の幅です。最初の記録で決めた基準方向を中心に、左右に広がります。連続記録が長くなるほど広がります。</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>連続記録</th><th>方向範囲</th></tr></thead>
+          <tbody>
+            <tr><td>0日</td><td>45°</td></tr>
+            <tr><td>30日</td><td>90°</td></tr>
+            <tr><td>90日</td><td>135°</td></tr>
+            <tr><td>180日</td><td>180°</td></tr>
+            <tr><td>225日</td><td>225°</td></tr>
+            <tr><td>270日</td><td>270°</td></tr>
+            <tr><td>315日</td><td>315°</td></tr>
+            <tr><td>365日</td><td>360°（すべての方向）</td></tr>
+          </tbody>
+        </table></div>
+        <p>現在の値は、アプリの設定タブ › <strong>自分の成長</strong> › <strong>探索半径と方向範囲</strong>で確認できます。</p>
+      </div></details>
+
+      <details class="faq"><summary>探索半径（旅の隣人）はどのように決まりますか？</summary><div>
+        <p>探索半径は、自分の仮想位置を中心に旅の隣人を探す範囲です。フィードには、この半径の中にある直近7日間の公開記録が表示されます。フィードを見るには、自分の記録が1件以上必要です。</p>
+        <p>探索半径 = 基本半径 + 連続記録ボーナス + 距離ボーナス（最大50km）</p>
+        <ul>
+          <li><strong>基本半径</strong>：5km</li>
+          <li><strong>連続記録ボーナス</strong>：連続記録が1日増えるごとに少しずつ増え、365日で35kmになります。</li>
+          <li><strong>距離ボーナス</strong>：最後の記録の移動距離1kmごとに1kmずつ、最大10kmまで加わります。</li>
+          <li>1日でも記録を休むと、連続記録ボーナスは0になります。</li>
+        </ul>
+        <p>たとえば、1日目に0kmを記録すると約5.1kmです。8日連続で記録し、最後に4.2km歩いた場合は約10kmです。365日連続で記録し、最後に10km以上歩いた場合は50kmです。</p>
+        <p>フィードのカードには、正確な距離ではなく、仮想位置どうしの距離の範囲が表示されます。</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>仮想位置どうしの距離</th><th>カードの表示</th></tr></thead>
+          <tbody>
+            <tr><td>1km未満</td><td>1km以内</td></tr>
+            <tr><td>1km以上5km未満</td><td>5km以内</td></tr>
+            <tr><td>5km以上10km未満</td><td>10km以内</td></tr>
+            <tr><td>10km以上</td><td>半径内</td></tr>
+          </tbody>
+        </table></div>
+        <p>現在の値は、アプリの設定タブ › <strong>自分の成長</strong> › <strong>探索半径と方向範囲</strong>で確認できます。</p>
+      </div></details>
+
+      <details class="faq"><summary>地球一周は何kmですか？</summary><div>
+        <p>累計の移動距離40,075kmが地球一周です。進み具合は、<strong>旅</strong>タブ › <strong>マイルストーン</strong>と、<strong>記録</strong>タブ › <strong>統計</strong> › <strong>地球一周チャレンジ</strong>で確認できます。</p>
+      </div></details>
+
+      <details class="faq"><summary>旅行に行ったり、iPhoneのタイムゾーンを変えたりするとどうなりますか？</summary><div>
+        <p>記録の日付と「昨日」の範囲は、登録したときに保存したタイムゾーンを基準に決めます。iPhoneのタイムゾーンを変えても、この基準は変わりません。</p>
+        <p>たとえば、保存したタイムゾーンがソウルの場合、ロサンゼルスにいても、10月9日の記録にはソウル時間の10月8日0時から24時までの歩数が入ります。</p>
+        <p>このバージョンには、保存したタイムゾーンを変更する機能はありません。保存したタイムゾーンは、アプリの設定タブ › <strong>アカウント</strong> › <strong>タイムゾーン</strong>で確認できます。</p>
+      </div></details>
+    </section>
+
+    <section id="ja-support-s6">
+      <h2>よくある質問：位置情報と公開範囲</h2>
+
+      <details class="faq"><summary>位置情報へのアクセスを許可しないとどうなりますか？</summary><div>
+        <p>位置情報へのアクセスを許可しなくても、登録と記録ができます。</p>
+        <ul>
+          <li>出発都市は、iPhoneのタイムゾーン設定から選んだ代表的な都市になります。タイムゾーンから選べない場合は、地域設定の国の代表的な都市になります。それでも選べない場合は、ソウルになります。</li>
+          <li>記録は同じように保存されます。記録するときは位置情報を使わないためです。</li>
+          <li>出発都市は登録した後に変更できません。後から位置情報を許可しても、出発都市は変わりません。</li>
+        </ul>
+        <p>後から許可するには、iPhoneの「設定」App › <strong>プライバシーとセキュリティ</strong> › <strong>位置情報サービス</strong> › <strong>StepStella</strong>で変更します。アプリの設定タブ › <strong>アクセス許可</strong> › <strong>位置情報</strong>をタップしても、iPhoneの「設定」Appが開きます。</p>
+      </div></details>
+
+      <details class="faq"><summary>ほかのユーザーに自分の正確な位置が見えますか？</summary><div>
+        <p>いいえ。ほかのユーザーには、あなたの正確な位置は見えません。</p>
+        <ul>
+          <li>アプリは、アプリを使っている間だけ位置情報を使います。位置を読み取るのは出発都市を決めるときだけで、記録するときは読み取りません。</li>
+          <li>出発都市には、正確な座標ではなく都市の中心を保存します。都市が見つからない場合は、近くの地域の中心を保存します。</li>
+          <li>記録するときは位置を読み取りません。記録には仮想位置だけを保存します。</li>
+          <li>フィードのカードには、座標ではなく仮想位置どうしの距離の範囲（例：「5km以内」）だけが表示されます。</li>
+          <li>あなたをフォローしている人は、あなたの直近30日間の公開記録のおおよその仮想位置を地球儀で見ることができます。位置は、幅約5kmのマスの中心に置き換えてから送ります。</li>
+        </ul>
+        <p>仮想位置は実際の位置ではありません。ただし、最初の記録は出発都市の中心に残ります。そのため、最初の記録が直近30日間の公開記録であれば、フォロワーはあなたの出発都市のおおよその場所がわかります。最初の記録を非公開にすると、フォロワーには表示されません。</p>
+      </div></details>
+
+      <details class="faq"><summary>公開記録には何が表示されますか？</summary><div>
+        <p>公開記録は、記録した日から7日間、旅の隣人のフィードに表示されます。カードには次の内容が表示されます。</p>
+        <ul>
+          <li>匿名ID（例：#A3F29C01）。本名とプロフィール写真はありません。匿名IDは90日ごとに自動で新しいIDに変わります。</li>
+          <li>仮想位置どうしの距離の範囲</li>
+          <li>昨日の正確な歩数と移動距離</li>
+          <li>メッセージ（最大140文字）</li>
+          <li>いいねの数</li>
+          <li>日付</li>
+        </ul>
+        <p>いいねは数だけが表示されます。誰がいいねしたかは、記録した本人にも見えません。フォローは最大30日間続き、相手には通知されません。</p>
+        <p>歩数と距離を見せたくない場合は、その記録を非公開にしてください。</p>
+      </div></details>
+    </section>
+
+    <section id="ja-support-s7">
+      <h2>よくある質問：報告とブロック</h2>
+
+      <details class="faq"><summary>不適切な記録を報告するにはどうすればよいですか？</summary><div>
+        <p><strong>フィード</strong>タブで、記録カードの<strong>…</strong>（その他のオプション） › <strong>報告</strong>をタップし、理由を選びます。</p>
+        <ul>
+          <li>理由：スパム、不適切なコンテンツ、プライバシーの侵害、その他</li>
+          <li>報告した記録は、自分のフィードからすぐに消えます。</li>
+          <li>報告は1日10件までです。</li>
+          <li>1つの記録を3人が報告すると、その記録はほかのユーザーのフィードで自動的に非表示になります。</li>
+          <li>報告は記録ごとに行います。ユーザーを報告する機能はありません。</li>
+        </ul>
+        <p>メールでもお知らせいただけます。アプリの設定タブ › <strong>サポート</strong> › <strong>お問い合わせ</strong>で、お問い合わせの種類を「不適切な記録の報告」だけ残して送ってください。</p>
+        <p>運営者が報告を確認する方法と期間：報告を受けてから48時間以内に確認します。<a href="https://purple-lamp-236.github.io/walk-log-privacy/#ja-terms-s10">利用規約</a>に違反した記録は、非表示にするか、メッセージを削除します。</p>
+      </div></details>
+
+      <details class="faq"><summary>ほかのユーザーをブロックするにはどうすればよいですか？</summary><div>
+        <p><strong>フィード</strong>タブで、記録カードの<strong>…</strong>（その他のオプション） › <strong>このユーザーをブロック</strong> › <strong>ブロック</strong>をタップします。</p>
+        <ul>
+          <li>お互いの記録が、お互いのフィードに表示されなくなります。</li>
+          <li>お互いのフォローがすべて解除され、再びフォローすることはできません。</li>
+          <li>ブロックしたことは相手に通知されません。</li>
+          <li><strong>ブロックは取り消せません。</strong>ブロックしたユーザーの一覧を見る画面もありません。</li>
+        </ul>
+      </div></details>
+    </section>
+
+    <section id="ja-support-s8">
+      <h2>よくある質問：アカウントとデータ</h2>
+
+      <details class="faq"><summary>アカウントを削除するにはどうすればよいですか？</summary><div>
+        <p>アプリの設定タブ › <strong>アカウント</strong> › <strong>アカウントを削除</strong>をタップします。確認画面で<strong>完全に削除</strong>をタップし、Appleアカウントでもう一度確認します。</p>
+        <ul>
+          <li>Appleアカウントの確認画面でキャンセルすると、何も削除されません。</li>
+          <li>確認が終わると、<strong>すぐに削除</strong>されます。猶予期間はありません。</li>
+          <li><strong>削除は取り消せません。</strong></li>
+        </ul>
+        <p>アカウントと一緒に削除されるもの：</p>
+        <ul>
+          <li>アカウント情報：匿名ID、タイムゾーン、出発都市、基準方向</li>
+          <li>すべての記録：仮想位置、歩数、移動距離、メッセージ、公開設定</li>
+          <li>連続記録と、累計の距離・歩数</li>
+          <li>フォロー：自分がフォローした相手と、自分をフォローした相手</li>
+          <li>いいね：自分が付けたいいねと、自分の記録に付いたいいね</li>
+          <li>報告：自分が送った報告と、自分の記録に対する報告</li>
+          <li>ブロック：自分がブロックした相手と、自分をブロックした相手</li>
+        </ul>
+        <p>削除が終わると、アプリはサインアウトし、iPhoneに保存したキャッシュを削除します。</p>
+        <p>削除した後も、しばらく残ることがあるもの：</p>
+        <ul>
+          <li>サーバーのバックアップ：運営者はサーバーのバックアップを作成しません。そのため、削除した情報が運営者のバックアップに残ることはありません。サーバーで使っているSupabaseの無料プランには、自動バックアップがありません。</li>
+          <li>サーバーのログ（サーバーが自動で残すリクエストの記録）：1日（Supabaseの無料プランの場合）</li>
+          <li>ほかのユーザーのiPhoneにあるフィードのキャッシュ：そのユーザーがフィードを更新するまで、あなたの公開記録のカードが残ることがあります。</li>
+          <li>運営者に送ったお問い合わせメール</li>
+        </ul>
+        <p>ヘルスケアのデータとAppleアカウントは、アプリでは削除しません。ヘルスケアの元データは、最初からサーバーに送っていません。</p>
+        <p>アカウントを削除すると、運営者はAppleに、このアプリの「Appleでサインイン」の連携の解除を依頼します。この依頼が失敗しても、アカウントは削除されます。連携が残っている場合は、iPhoneでご自分で解除できます。<strong>設定</strong> › <strong>[ユーザ名]</strong> › <strong>Appleでサインイン</strong>でこのアプリを選び、<strong>削除</strong>をタップします。</p>
+      </div></details>
+
+      <details class="faq"><summary>iPhoneを買い替えても記録は残りますか？</summary><div>
+        <p>記録はiPhoneではなく、サーバーにアカウントと一緒に保存されています。新しいiPhoneで、同じAppleアカウントを使ってサインインすると、記録をもう一度見ることができます。保存したタイムゾーンと出発都市もそのままです。</p>
+        <p>次の設定はiPhoneにだけ保存されています。新しいiPhoneでもう一度設定してください。</p>
+        <ul>
+          <li>毎日の通知のオン・オフと通知時刻</li>
+          <li>地図マーカー</li>
+          <li>外観モード</li>
+        </ul>
+        <p>サインアウトしても、サーバーの記録は削除されません。</p>
+      </div></details>
+
+      <details class="faq"><summary>自分のデータを書き出せますか？</summary><div>
+        <p>このバージョンには、データを書き出す機能はありません。自分の記録は<strong>記録</strong>タブで見ることができます。</p>
+        <p>メールでご依頼いただくと、運営者がそのアカウントのデータをファイルにして、依頼を受けた日から10日以内にメールで送ります。本人確認の方法は、<a href="https://purple-lamp-236.github.io/walk-log-privacy/#ja-privacy-s13">プライバシーポリシー第13項</a>に従います。</p>
+      </div></details>
+    </section>
+
+    <section id="ja-support-s9">
+      <h2>プライバシーポリシーと利用規約</h2>
+      <ul>
+        <li><a href="https://purple-lamp-236.github.io/walk-log-privacy/#ja-privacy">プライバシーポリシー</a></li>
+        <li><a href="https://purple-lamp-236.github.io/walk-log-privacy/#ja-terms">利用規約</a></li>
+      </ul>
+      <p>アプリ内では、アプリの設定タブ › <strong>プライバシー</strong> › <strong>データポリシー</strong>で2つの文書を開けます。「アカウントを作成」画面にも2つの文書へのリンクがあります。</p>
+    </section>
+
+    <section id="ja-support-s10">
+      <h2>オープンソースライセンスと画像のクレジット</h2>
+      <p>アプリが使っているオープンソースソフトウェアと画像のライセンスは、アプリの設定タブ › <strong>プライバシー</strong> › <strong>データポリシー</strong> › <strong>オープンソースライセンス</strong>で確認できます。</p>
+      <ul>
+        <li>地球儀：globe.gl、three.js、three-globe</li>
+        <li>地球の画像：NASA Blue Marble。高解像度の地球の画像は、NASAの2004年7月の「Blue Marble: Next Generation」画像を、アプリ用に縮小したものです。"Image credit: NASA Earth Observatory."</li>
+        <li>サーバーとの接続：supabase-swiftと関連パッケージ</li>
+      </ul>
+      <p>地球儀のライブラリと地球の画像はアプリに含まれています。アプリを使っている間に、外部のサーバーから読み込むことはありません。</p>
+    </section>
+  </div>
+</article>
+</main>
+<footer class="site-footer"><a href="https://purple-lamp-236.github.io/walk-log-landing/">StepStella</a> · <a href="https://purple-lamp-236.github.io/walk-log-privacy/">Privacy Policy &amp; Terms of Service</a> · <a href="https://purple-lamp-236.github.io/walk-log-support/">Support</a> · <a href="mailto:purple.lamp.236@gmail.com">purple.lamp.236@gmail.com</a><br>© 2026 YoungBeom Seo</footer>
+</body>
+</html>
